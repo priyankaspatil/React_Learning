@@ -5,9 +5,7 @@ import {
 } from 'reactstrap';
 
 
-const renderDish = (props) => {
-    console.log("Checking dishDetails props", props);
-    debugger;
+function RenderDish(props) {
     if (props.dish != null)
         return (
             <div className='row'>
@@ -26,8 +24,7 @@ const renderDish = (props) => {
                             return (
                                     <div>
                                         <span>{comments.comment}</span><br/><br/>
-                                        <span>--{comments.author}, </span>
-                                        <span>{comments.date}</span>
+                                        <span>--{comments.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day:'2-digit'}).format(new Date(Date.parse(comments.date)))}</span>
                                     </div>
                                 );
                             })
@@ -41,4 +38,4 @@ const renderDish = (props) => {
         );
 }
 
-export default renderDish;
+export default RenderDish;
