@@ -14,8 +14,8 @@ function About(props) {
                         <Media heading>
                             Leader {leader.name}
                         </Media>
-                        {leader.designation}<br/>
-                        {leader.description}
+                        <p>{leader.designation}</p><br/>
+                        <p>{leader.description}</p>
                     </Media>
                 </Media>
             </div>
