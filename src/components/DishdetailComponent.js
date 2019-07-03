@@ -48,15 +48,13 @@ class CommentFrom extends Component {
                         <hr />
                     </div>
                     <div className="col-12 col-md-5">
-                        <div >
-                            <Card>
-                                <CardImg top src={this.props.dish.image} alt={this.props.dish.name} />
-                                <CardBody>
-                                    <CardTitle>{this.props.dish.name}</CardTitle>
-                                    <CardText>{this.props.dish.description}</CardText>
-                                </CardBody>
-                            </Card>
-                        </div>
+                        <Card>
+                            <CardImg top src={this.props.dish.image} alt={this.props.dish.name} />
+                            <CardBody>
+                                <CardTitle>{this.props.dish.name}</CardTitle>
+                                <CardText>{this.props.dish.description}</CardText>
+                            </CardBody>
+                        </Card>
                     </div>
                     <div className="col-12 col-md-5">
                         {this.props.comments.map((comments) => {
@@ -69,7 +67,7 @@ class CommentFrom extends Component {
                                 );
                             })
                         }
-                    <div>
+                        <div>
                         <div className="row-md-5">
                             <Button onClick={this.handleToggle} color="primary"><FontAwesomeIcon icon="pen" /> Submit Comment</Button>{' '}
                         </div>
