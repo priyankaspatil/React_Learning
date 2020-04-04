@@ -30,7 +30,7 @@ class CommentFrom extends Component {
 
     handleSubmit(values){
         this.handleToggle()
-        this.props.addComment(this.props.dish.id, values.rating, values.yourname, values.comments   )
+        this.props.postComment(this.props.dish.id, values.rating, values.yourname, values.comments   )
         // alert("Your feedback is submited! & Current state is:" + JSON.stringify(values));
     }
 
@@ -96,7 +96,7 @@ class CommentFrom extends Component {
                         </div>
                         <div>
                             <Modal isOpen={this.state.modal} toggle={this.handleToggle} >
-                                <LocalForm onSubmit={(values) => this.handleSubmit(values)} addComment={this.props.addComment} dishId={this.props.dish.id}>
+                                <LocalForm onSubmit={(values) => this.handleSubmit(values)} postComment={this.props.postComment} dishId={this.props.dish.id}>
                                     <ModalHeader toggle={this.handleToggle}>Submit Comment</ModalHeader>
                                     <ModalBody>
                                         <Row className='form-group'>

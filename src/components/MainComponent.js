@@ -9,7 +9,7 @@ import Contact from './ContactComponent';
 import '../App.css';
 import AboutComponent from './AboutComponent';
 import { connect } from 'react-redux';
-import { addComment, fetchDishes, fetchComments, fetchPromos } from '../redux/ActionCreators';
+import { postComment, fetchDishes, fetchComments, fetchPromos } from '../redux/ActionCreators';
 import { actions } from 'react-redux-form';
 
 const mapStateToProps= state => {
@@ -22,7 +22,7 @@ const mapStateToProps= state => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
+  postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
   fetchDishes: () => {dispatch(fetchDishes())},
   fetchComments: () => {dispatch(fetchComments())},
   fetchPromos: () => {dispatch(fetchPromos())},
@@ -70,7 +70,7 @@ class Main extends Component {
               errMsg={this.props.dishes.errorMsg}
               comments={this.props.comments.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))} 
               commentsErrMsg={this.props.comments.errorMsg}
-              addComment={this.props.addComment} />
+              postComment={this.props.postComment} />
         );
       };
 
