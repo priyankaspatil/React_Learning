@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons'
+import { Loading } from './LoadingComponent';
 library.add(fas, faPen);
 
 const required = (val) => val && val.length;
@@ -39,7 +40,25 @@ class CommentFrom extends Component {
     }
 
     render(){
-            if (this.props.dish != null)
+        if(this.props.isLoading) {
+            return (
+                <div className="container">
+                    <div className="row">
+                        <Loading />
+                    </div>
+                </div>
+            )
+        }
+        else if(this.props.errMsg) {
+            return (
+                <div className="container">
+                    <div className="row">
+                        <h4>{this.props.errMsg}</h4>
+                    </div>
+                </div>
+            )
+        }
+        else if (this.props.dish != null)
             return (
                 <div className='row'>
                     <Breadcrumb>
