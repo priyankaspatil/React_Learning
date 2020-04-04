@@ -12,6 +12,7 @@ library.add(fas, faPen);
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
+
 class CommentFrom extends Component {
     constructor(props){
         super(props);
@@ -26,7 +27,9 @@ class CommentFrom extends Component {
 
 
     handleSubmit(values){
-        alert("Your feedback is submited! & Current state is:" + JSON.stringify(values));
+        this.handleToggle()
+        this.props.addComment(this.props.dish.id, values.rating, values.yourname, values.comments   )
+        // alert("Your feedback is submited! & Current state is:" + JSON.stringify(values));
     }
 
     handleToggle=()=>{
@@ -73,7 +76,7 @@ class CommentFrom extends Component {
                         </div>
                         <div>
                             <Modal isOpen={this.state.modal} toggle={this.handleToggle} >
-                                <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                                <LocalForm onSubmit={(values) => this.handleSubmit(values)} addComment={this.props.addComment} dishId={this.props.dish.id}>
                                     <ModalHeader toggle={this.handleToggle}>Submit Comment</ModalHeader>
                                     <ModalBody>
                                         <Row className='form-group'>
