@@ -8,6 +8,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons'
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 library.add(fas, faPen);
 
 const required = (val) => val && val.length;
@@ -71,7 +72,7 @@ class CommentFrom extends Component {
                     </div>
                     <div className="col-12 col-md-5">
                         <Card>
-                            <CardImg top src={this.props.dish.image} alt={this.props.dish.name} />
+                            <CardImg top src={baseUrl + this.props.dish.image} alt={this.props.dish.name} />
                             <CardBody>
                                 <CardTitle>{this.props.dish.name}</CardTitle>
                                 <CardText>{this.props.dish.description}</CardText>
