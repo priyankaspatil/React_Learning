@@ -34,11 +34,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 class Main extends Component {
 
-  constructor(props) {
-    super(props);
-    
-  }
-
   onDishSelect(dishId) {
     console.log("clicked")
     this.setState({ selectedDish: dishId});
@@ -82,7 +77,7 @@ class Main extends Component {
 
       const AboutUs = () => {
         return(
-          <AboutComponent leaders={this.props.leaders.leaders} />
+          <AboutComponent leaders={this.props.leaders.leaders} isLoading={this.props.leaders.isLoading} errMsg={this.props.leaders.errorMsg} />
         );
       };
 
