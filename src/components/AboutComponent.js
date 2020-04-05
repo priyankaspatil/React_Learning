@@ -1,28 +1,55 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../shared/baseUrl';
+import { Loading } from './LoadingComponent';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 function About(props) {
     const RenderLeaders = props.leaders.map((leader) => {
         return (
-            <div>
-                <Media>
-                    <Media left top href="#">
-                        <Media object data-src={leader.image} alt={leader.name} />
-                    </Media>
-                    <Media body>
-                        <Media heading>
-                            Leader {leader.name}
+            <Stagger in>
+                <div>
+                    <Fade in>
+                        <Media>
+                            <Media left top href="#">
+                                <Media object data-src={baseUrl + leader.image} alt={leader.name} />
+                            </Media>
+                            <Media body>
+                                <Media heading>
+                                    Leader {leader.name}
+                                </Media>
+                                <p>{leader.designation}</p><br/>
+                                <p>{leader.description}</p>
+                            </Media>
                         </Media>
-                        <p>{leader.designation}</p><br/>
-                        <p>{leader.description}</p>
-                    </Media>
-                </Media>
-            </div>
+                    </Fade>
+                </div>
+            </Stagger>
         );
     });
 
-    return(
+    
+    if(props.isLoading) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
+            </div>
+        )
+    }
+    else if(props.errMsg) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <h4>{props.errMsg}</h4>
+                </div>
+            </div>
+        )
+    }
+    else if (props.leaders != null)
+        return(
         <div className="container">
             <div className="row">
                 <Breadcrumb>
@@ -41,21 +68,26 @@ function About(props) {
                     <p>The restaurant traces its humble beginnings to <em>The Frying Pan</em>, a successful chain started by our CEO, Mr. Peter Pan, that featured for the first time the world's best cuisines in a pan.</p>
                 </div>
                 <div className="col-12 col-md-5">
-                    <Card>
-                        <CardHeader className="bg-primary text-white">Facts At a Glance</CardHeader>
-                        <CardBody>
-                            <dl className="row p-1">
-                                <dt className="col-6">Started</dt>
-                                <dd className="col-6">3 Feb. 2013</dd>
-                                <dt className="col-6">Major Stake Holder</dt>
-                                <dd className="col-6">HK Fine Foods Inc.</dd>
-                                <dt className="col-6">Last Year's Turnover</dt>
-                                <dd className="col-6">$1,250,375</dd>
-                                <dt className="col-6">Employees</dt>
-                                <dd className="col-6">40</dd>
-                            </dl>
-                        </CardBody>
-                    </Card>
+                    <FadeTransform in 
+                        transformProps={{
+                        exitTransform: 'scale(0.5) translateY(-50%)'
+                        }}>
+                        <Card>
+                            <CardHeader className="bg-primary text-white">Facts At a Glance</CardHeader>
+                            <CardBody>
+                                <dl className="row p-1">
+                                    <dt className="col-6">Started</dt>
+                                    <dd className="col-6">3 Feb. 2013</dd>
+                                    <dt className="col-6">Major Stake Holder</dt>
+                                    <dd className="col-6">HK Fine Foods Inc.</dd>
+                                    <dt className="col-6">Last Year's Turnover</dt>
+                                    <dd className="col-6">$1,250,375</dd>
+                                    <dt className="col-6">Employees</dt>
+                                    <dd className="col-6">40</dd>
+                                </dl>
+                            </CardBody>
+                        </Card>
+                    </FadeTransform>
                 </div>
                 <div className="col-12">
                     <Card>

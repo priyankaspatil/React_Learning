@@ -37,6 +37,7 @@ function RenderCard({ item, isLoadding, errMsg }) {
 }
 
 function Home(props) {
+  debugger;
   return (
     <div className="container">
       <div className="row align-items-start">
@@ -55,7 +56,10 @@ function Home(props) {
         />
         </div>
         <div className="col-12 col-md m-1">
-          <RenderCard item={props.leader} />
+          <RenderCard item={props.leader}
+          isLoadding={props.leadersLoading}
+          errMsg={props.leadersErrMsg} 
+        />
         </div>
       </div>
     </div>
