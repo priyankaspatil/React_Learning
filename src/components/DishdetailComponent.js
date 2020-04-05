@@ -9,6 +9,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons'
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 library.add(fas, faPen);
 
 const required = (val) => val && val.length;
@@ -71,25 +72,35 @@ class CommentFrom extends Component {
                         <hr />
                     </div>
                     <div className="col-12 col-md-5">
-                        <Card>
-                            <CardImg top src={baseUrl + this.props.dish.image} alt={this.props.dish.name} />
-                            <CardBody>
-                                <CardTitle>{this.props.dish.name}</CardTitle>
-                                <CardText>{this.props.dish.description}</CardText>
-                            </CardBody>
-                        </Card>
+                        <FadeTransform in 
+                            transformProps={{
+                            exitTransform: 'scale(0.5) translateY(-50%)'
+                            }}>
+                            <Card>
+                                <CardImg top src={baseUrl + this.props.dish.image} alt={this.props.dish.name} />
+                                <CardBody>
+                                    <CardTitle>{this.props.dish.name}</CardTitle>
+                                    <CardText>{this.props.dish.description}</CardText>
+                                </CardBody>
+                            </Card>
+                        </FadeTransform>
                     </div>
                     <div className="col-12 col-md-5">
-                        {this.props.comments.map((comments) => {
-                            return (
-                                    <div className="container">
-                                        <span>{comments.comment}</span>
-                                        <br/><br/>
-                                        <span>--{comments.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day:'2-digit'}).format(new Date(Date.parse(comments.date)))}</span>
-                                    </div>
-                                );
-                            })
-                        }
+                        <h4>Comments</h4>
+                            <Stagger in>
+                                {this.props.comments.map((comments) => {
+                                    return (
+                                        <Fade in>
+                                            <div className="container">
+                                                <span>{comments.comment}</span>
+                                                <br/><br/>
+                                                <span>--{comments.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day:'2-digit'}).format(new Date(Date.parse(comments.date)))}</span>
+                                            </div>
+                                        </Fade> 
+                                        );
+                                    })
+                                }
+                            </Stagger>
                         <div>
                         <div className="row-md-5">
                             <Button onClick={this.handleToggle} color="primary"><FontAwesomeIcon icon="pen" /> Submit Comment</Button>{' '}
